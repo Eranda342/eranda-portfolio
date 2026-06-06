@@ -1,0 +1,154 @@
+import { useEffect, useRef } from 'react';
+
+type Node = { x: number; y: number; z: number; vx: number; vy: number; vz: number };
+
+export function ParticleNetwork({ density = 0.00009, className = '' }: { density?: number; className?: string }) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const mouse = useRef({ x: -9999, y: -9999, active: false });
+  const running = useRef(true);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d', { alpha: true })!;
+    let dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+    let w = 0, h = 0;
+    let nodes: Node[] = [];
+
+    const resize = () => {
+      const r = canvas.getBoundingClientRect();
+      w = r.width; h = r.height;
+      canvas.width = Math.floor(w * dpr);
+      canvas.height = Math.floor(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const count = Math.max(40, Math.min(140, Math.floor(w * h * density)));
+      nodes = Array.from({ length: count }, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        z: Math.random() * 1 + 0.2,
+        vx: (Math.random() - 0.5) * 0.25,
+        vy: (Math.random() - 0.5) * 0.25,
+        vz: (Math.random() - 0.5) * 0.002,
+      }));
+    };
+    resize();
+    const ro = new ResizeObserver(resize);
+    ro.observe(canvas);
+
+    const onMove = (e: MouseEvent) => {
+      const r = canvas.getBoundingClientRect();
+      mouse.current.x = e.clientX - r.left;
+      mouse.current.y = e.clientY - r.top;
+      mouse.current.active = true;
+    };
+    const onLeave = () => { mouse.current.active = false; mouse.current.x = -9999; mouse.current.y = -9999; };
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseleave', onLeave);
+
+    const visibility = () => { running.current = !document.hidden; };
+    document.addEventListener('visibilitychange', visibility);
+
+    let raf = 0;
+    const tick = () => {
+      raf = requestAnimationFrame(tick);
+      if (!running.current) return;
+      ctx.clearRect(0, 0, w, h);
+
+      const mx = mouse.current.x, my = mouse.current.y, active = mouse.current.active;
+      const linkDist = Math.min(160, Math.max(110, Math.sqrt(w * h) / 9));
+      const mouseRadius = 180;
+
+      for (const n of nodes) {
+        // mouse repulsion / depth response
+        if (active) {
+          const dx = n.x - mx, dy = n.y - my;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < mouseRadius * mouseRadius && d2 > 0.01) {
+            const d = Math.sqrt(d2);
+            const f = (1 - d / mouseRadius) * 0.6;
+            n.vx += (dx / d) * f * 0.12;
+            n.vy += (dy / d) * f * 0.12;
+            n.z = Math.min(1.5, n.z + f * 0.02);
+          } else {
+            n.z = Math.max(0.2, n.z - 0.004);
+          }
+        } else {
+          n.z = Math.max(0.2, n.z - 0.002);
+        }
+
+        n.x += n.vx; n.y += n.vy;
+        n.vx *= 0.985; n.vy *= 0.985;
+        if (n.vx > -0.05 && n.vx < 0.05) n.vx += (Math.random() - 0.5) * 0.01;
+        if (n.vy > -0.05 && n.vy < 0.05) n.vy += (Math.random() - 0.5) * 0.01;
+
+        if (n.x < -20) n.x = w + 20; else if (n.x > w + 20) n.x = -20;
+        if (n.y < -20) n.y = h + 20; else if (n.y > h + 20) n.y = -20;
+      }
+
+      // links
+      for (let i = 0; i < nodes.length; i++) {
+        const a = nodes[i];
+        for (let j = i + 1; j < nodes.length; j++) {
+          const b = nodes[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < linkDist * linkDist) {
+            const d = Math.sqrt(d2);
+            const alpha = (1 - d / linkDist) * 0.5 * Math.min(a.z, b.z);
+            ctx.strokeStyle = `rgba(167, 139, 250, ${alpha})`;
+            ctx.lineWidth = 0.6;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // mouse link halo
+      if (active) {
+        for (const n of nodes) {
+          const dx = n.x - mx, dy = n.y - my;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < mouseRadius * mouseRadius) {
+            const d = Math.sqrt(d2);
+            const alpha = (1 - d / mouseRadius) * 0.55;
+            ctx.strokeStyle = `rgba(129, 140, 248, ${alpha})`;
+            ctx.lineWidth = 0.6;
+            ctx.beginPath();
+            ctx.moveTo(n.x, n.y);
+            ctx.lineTo(mx, my);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // nodes
+      for (const n of nodes) {
+        const r = 1.2 + n.z * 1.4;
+        const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 4);
+        grd.addColorStop(0, `rgba(196, 181, 253, ${0.85 * n.z})`);
+        grd.addColorStop(1, 'rgba(167, 139, 250, 0)');
+        ctx.fillStyle = grd;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, r * 4, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = `rgba(237, 233, 254, ${0.9 * n.z})`;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    };
+    tick();
+
+    return () => {
+      cancelAnimationFrame(raf);
+      ro.disconnect();
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseleave', onLeave);
+      document.removeEventListener('visibilitychange', visibility);
+    };
+  }, [density]);
+
+  return <canvas ref={canvasRef} className={className} />;
+}

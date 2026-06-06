@@ -1,0 +1,57 @@
+:root {
+  --bg-0: #050608;
+  --bg-1: #0a0c10;
+  --bg-2: #0f1218;
+  --ink-0: #f4f6fa;
+  --ink-1: #cdd3df;
+  --ink-2: #8a93a6;
+  --ink-3: #555c6d;
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.14);
+
+  --accent: #a78bfa;
+  --accent-2: #818cf8;
+  --accent-3: #c4b5fd;
+  --glow: 0 0 60px rgba(167, 139, 250, 0.45);
+  --glow-soft: 0 0 120px rgba(129, 140, 248, 0.22);
+
+  --grad-hero: radial-gradient(1200px 600px at 20% 10%, rgba(167, 139, 250, 0.16), transparent 60%),
+               radial-gradient(900px 500px at 80% 30%, rgba(129, 140, 248, 0.14), transparent 60%),
+               radial-gradient(800px 600px at 50% 100%, rgba(196, 181, 253, 0.10), transparent 60%);
+
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html {
+  position: relative;
+}
+
+html, body {
+  overflow-x: hidden;
+  background: var(--bg-0);
+  color: var(--ink-0);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(167, 139, 250, 0.32);
+  color: var(--ink-0);
+}
+
+.font-serif { font-family: 'Instrument Serif', serif; }
+.font-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.16); }
+
+/* Lenis */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
