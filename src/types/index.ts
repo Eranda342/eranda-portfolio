@@ -1,16 +1,30 @@
 export type Project = {
   title: string;
-  tag: string;
-  year: string;
-  stack: string[];
-  problem: string;
-  solution: string;
-  outcome: string;
-  gradient: string;
-  accent: string;
-  github: string;
-  demo: string;
+  description: string;
+  screenshot: string;
+  githubUrl: string;
+  liveUrl: string;
+  techStack: string[];
+  featured?: boolean;
+  category?: "featured" | "fullstack" | "frontend" | "backend" | "ai";
+  
+  // Deep Case Study fields (for Featured/Tier 1)
+  problem?: string;
+  solution?: string;
+  architecture?: string;
+  features?: string[];
+  outcome?: string;
+  metrics?: {
+    users?: string;
+    performanceGain?: string;
+    duration?: string;
+    role?: string;
+    teamSize?: string;
+  };
+  // Legacy styling (optional)
   span?: string;
+  gradient?: string;
+  accent?: string;
   matrix?: boolean;
 };
 

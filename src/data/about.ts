@@ -1,11 +1,11 @@
 export const aboutData = {
   heading: 'A quiet builder,\nfocused on craft.',
-  bioPrimary: 'Final-year Computer Science student at the University of Plymouth, graduating 2026. Specializing in Full-Stack Development and scalable web architecture.',
-  bioSecondary: 'Over the past four years, I\'ve architected full-stack systems and motion-led marketing sites. My best work exists in the intersection of performance, accessibility, and detail — delivering polish you feel before you notice.',
+  bioPrimary: 'Final-year Computer Science student at the University of Plymouth. Specializing in full-stack development, modern web applications, scalable systems, and clean architecture.',
+  bioSecondary: 'My work focuses on the intersection of performance, accessibility, and maintainable code. I prioritize building robust architectures over chasing trends, ensuring every system is designed to scale.',
   metrics: [
-    { k: '20+', v: 'Projects shipped' },
-    { k: '4 yrs', v: 'Building on the web' },
-    { k: '3.8', v: 'CGPA' },
+    { k: 'Final Year', v: 'BSc Computer Science' },
+    { k: 'Full-Stack', v: 'React, Node.js, TypeScript' },
+    { k: '2026', v: 'Expected Graduation' },
   ],
 };
 

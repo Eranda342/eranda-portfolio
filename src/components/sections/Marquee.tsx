@@ -1,6 +1,6 @@
 const items = [
-  'React', 'TypeScript', 'Next.js', 'Node.js', 'Python', 'PostgreSQL', 'Three.js',
-  'TailwindCSS', 'Docker', 'AWS', 'Figma', 'GraphQL', 'Motion', 'Rust',
+  'React', 'TypeScript', 'Next.js', 'Node.js', 'Tailwind CSS', 'Framer Motion', 'MongoDB',
+  'Docker', 'Express.js', 'Figma', 'WebSockets', 'REST APIs', 'Vercel'
 ];
 
 export function Marquee() {

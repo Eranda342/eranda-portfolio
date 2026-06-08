@@ -56,7 +56,7 @@ export function About() {
           {/* ── RIGHT COLUMN: paragraphs + metric cards ── */}
           <div className="lg:col-span-5 flex flex-col gap-8">
             <Reveal delay={0.05}>
-              <p className="text-xl sm:text-2xl leading-[1.55] text-[var(--ink-1)] font-serif max-w-[600px]" dangerouslySetInnerHTML={{ __html: aboutData.bioPrimary.replace('University of Plymouth', '<em className="text-[var(--accent)]">University of Plymouth</em>').replace('Full-Stack Development and scalable web architecture', '<em className="text-[var(--accent-2)]">Full-Stack Development and scalable web architecture</em>') }} />
+              <p className="text-xl sm:text-2xl leading-[1.55] text-[var(--ink-1)] font-serif max-w-[600px]" dangerouslySetInnerHTML={{ __html: aboutData.bioPrimary.replace('University of Plymouth', '<em className="text-[var(--accent)]">University of Plymouth</em>').replace('full-stack development', '<em className="text-[var(--accent-2)]">full-stack development</em>') }} />
             </Reveal>
             <Reveal delay={0.1}>
               <p className="text-base sm:text-lg leading-[1.8] text-[var(--ink-2)] max-w-[600px]">
@@ -68,11 +68,11 @@ export function About() {
                 {aboutData.metrics.map((s) => (
                   <div
                     key={s.v}
-                    className="glass rounded-2xl p-5"
+                    className="glass rounded-2xl p-5 flex flex-col justify-center"
                     style={{ border: '1px solid rgba(99,102,241,0.20)' }}
                   >
                     <div
-                      className="font-serif text-3xl sm:text-4xl"
+                      className="font-serif text-xl sm:text-2xl leading-tight"
                       style={{ color: '#ffffff', fontWeight: 700 }}
                     >
                       {s.k}
