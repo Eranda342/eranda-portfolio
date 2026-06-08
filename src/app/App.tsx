@@ -1,13 +1,13 @@
-import { SmoothScroll } from './components/SmoothScroll';
-import { Nav } from './components/Nav';
-import { Hero } from './components/Hero';
-import { Marquee } from './components/Marquee';
-import { About } from './components/About';
-import { Skills } from './components/Skills';
-import { Work } from './components/Work';
-import { Experience } from './components/Experience';
-import { Contact } from './components/Contact';
-import { Footer } from './components/Footer';
+import { SmoothScroll } from '../components/sections/SmoothScroll';
+import { Nav } from '../components/sections/Nav';
+import { Hero } from '../components/sections/Hero';
+import { Marquee } from '../components/sections/Marquee';
+import { About } from '../components/sections/About';
+import { Skills } from '../components/sections/Skills';
+import { Work } from '../components/sections/Work';
+import { Experience } from '../components/sections/Experience';
+import { Contact } from '../components/sections/Contact';
+import { Footer } from '../components/sections/Footer';
 
 export default function App() {
   return (

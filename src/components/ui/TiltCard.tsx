@@ -1,7 +1,7 @@
 import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
 import { useRef, type ReactNode } from 'react';
 
-export function Tilt3D({ children, className = '', intensity = 8 }: { children: ReactNode; className?: string; intensity?: number }) {
+export function TiltCard({ children, className = '', intensity = 8 }: { children: ReactNode; className?: string; intensity?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);

@@ -1,9 +1,13 @@
 import { motion, useScroll, useTransform } from 'motion/react';
-import { useRef } from 'react';
+import React, { useRef, lazy, Suspense } from 'react';
 import { ArrowDownRight, Sparkles } from 'lucide-react';
-import { ParticleNetwork } from './ParticleNetwork';
-import { ImageWithFallback } from './figma/ImageWithFallback';
+import { ImageWithFallback } from '../figma/ImageWithFallback';
+import { siteConfig } from '../../config/site';
+import { socialLinks } from '../../config/navigation';
+import { Button } from '../ui/Button';
 import photo from '../../imports/Me.png';
+
+const ParticleNetwork = lazy(() => import('../webgl/ParticleNetwork').then(m => ({ default: m.ParticleNetwork })));
 
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null);
@@ -12,14 +16,18 @@ export function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 0.9], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.96]);
 
+  const [firstName, lastName] = siteConfig.name.split(' ');
+
   return (
     <section ref={ref} id="top" style={{ position: 'relative' }} className="relative min-h-[100svh] w-full overflow-hidden">
       <div className="absolute inset-0" style={{ background: 'var(--grad-hero)' }} />
       <div className="absolute inset-0 grid-bg opacity-60" />
       <div className="noise" />
 
-      {/* Particle network */}
-      <ParticleNetwork className="absolute inset-0 h-full w-full" />
+      {/* Particle network (Lazy Loaded) */}
+      <Suspense fallback={null}>
+        <ParticleNetwork className="absolute inset-0 h-full w-full" />
+      </Suspense>
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute right-[5%] top-[20%] h-[40vh] w-[40vh] rounded-full bg-[#a78bfa]/10 blur-[140px]" />
         <div className="absolute left-[-5%] bottom-[10%] h-[35vh] w-[35vh] rounded-full bg-[#818cf8]/10 blur-[140px]" />
@@ -46,7 +54,7 @@ export function Hero() {
             transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
             className="block text-gradient"
           >
-            Eranda
+            {firstName}
           </motion.span>
           <motion.span
             initial={{ opacity: 0, y: 40, filter: 'blur(12px)' }}
@@ -54,7 +62,7 @@ export function Hero() {
             transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1], delay: 0.55 }}
             className="block italic text-gradient-accent"
           >
-            Buddhika.
+            {lastName}.
           </motion.span>
         </h1>
 
@@ -65,7 +73,7 @@ export function Hero() {
           className="mt-7 max-w-xl text-[17px] sm:text-lg leading-relaxed"
           style={{ color: '#E2E8F0' }}
         >
-          Aspiring Software Engineer · Building scalable web apps. Final-year CS student
+          Aspiring {siteConfig.role} · Building scalable web apps. Final-year CS student
           crafting calm, cinematic, production-grade interfaces.
         </motion.p>
 
@@ -75,31 +83,24 @@ export function Hero() {
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 1.05 }}
           className="mt-8 flex flex-wrap items-center gap-3"
         >
-          <a
-            href="#work"
-            className="group relative inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white text-black overflow-hidden hover-lift"
-          >
-            <span className="relative z-10">View My Work</span>
-            <ArrowDownRight className="relative z-10 h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
-            <span className="absolute inset-0 bg-gradient-to-r from-[#a78bfa] via-[#818cf8] to-[#c4b5fd] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          </a>
-          <a
-            href="https://github.com"
-            target="_blank" rel="noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full text-sm hover:bg-white/5 transition-colors"
-            style={{ color: '#E2E8F0', border: '1px solid #334155' }}
-          >
-            <Sparkles className="h-4 w-4 text-[var(--accent)]" />
-            GitHub
-          </a>
-          <a
-            href="https://linkedin.com"
-            target="_blank" rel="noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full text-sm hover:bg-white/5 transition-colors"
-            style={{ color: '#E2E8F0', border: '1px solid #334155' }}
-          >
-            LinkedIn
-          </a>
+          <Button asChild variant="primary" className="group relative overflow-hidden hover-lift h-12 px-6">
+            <a href="#work">
+              <span className="relative z-10">View My Work</span>
+              <ArrowDownRight className="relative z-10 ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+              <span className="absolute inset-0 bg-gradient-to-r from-[#a78bfa] via-[#818cf8] to-[#c4b5fd] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            </a>
+          </Button>
+          <Button asChild variant="glass" className="h-12 px-5">
+            <a href={socialLinks.github} target="_blank" rel="noreferrer">
+              <Sparkles className="mr-2 h-4 w-4 text-[var(--accent)]" />
+              GitHub
+            </a>
+          </Button>
+          <Button asChild variant="glass" className="h-12 px-5">
+            <a href={socialLinks.linkedin} target="_blank" rel="noreferrer">
+              LinkedIn
+            </a>
+          </Button>
         </motion.div>
 
         {/* Floating headshot */}
@@ -113,10 +114,9 @@ export function Hero() {
             className="relative h-[504px] w-[392px] lg:h-[616px] lg:w-[476px]"
             style={{ background: 'transparent' }}
           >
-            {/* Grayscale portrait — lighten blends white areas into the dark canvas */}
             <ImageWithFallback
               src={photo}
-              alt="Eranda Buddhika — portrait"
+              alt={`${siteConfig.name} — portrait`}
               className="absolute inset-0 h-full w-full object-cover object-top"
               style={{
                 mixBlendMode: 'lighten',
@@ -126,8 +126,6 @@ export function Hero() {
                 WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 35%, transparent 100%)',
               }}
             />
-            {/* Indigo/purple ambient tint — mix-blend-mode:color recolors gray midtones
-                with violet atmosphere without touching luminosity values */}
             <div
               className="absolute inset-0 pointer-events-none"
               style={{

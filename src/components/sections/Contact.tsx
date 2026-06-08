@@ -1,11 +1,14 @@
-import { Reveal } from './Reveal';
-import { Tilt3D } from './Tilt3D';
+import { Reveal } from '../ui/Reveal';
+import { TiltCard } from '../ui/TiltCard';
 import { ArrowUpRight, Github, Linkedin, Mail, Twitter } from 'lucide-react';
+import { Container } from '../ui/Container';
+import { socialLinks } from '../../config/navigation';
+import { Button } from '../ui/Button';
 
 const socials = [
-  { icon: Github, label: 'GitHub', handle: '@erandabuddhika', href: '#' },
-  { icon: Linkedin, label: 'LinkedIn', handle: 'in/erandabuddhika', href: '#' },
-  { icon: Twitter, label: 'Twitter', handle: '@erandabldhka', href: '#' },
+  { icon: Github, label: 'GitHub', handle: '@erandabuddhika', href: socialLinks.github },
+  { icon: Linkedin, label: 'LinkedIn', handle: 'in/erandabuddhika', href: socialLinks.linkedin },
+  { icon: Twitter, label: 'Twitter', handle: '@erandabldhka', href: socialLinks.twitter },
 ];
 
 export function Contact() {
@@ -16,7 +19,7 @@ export function Contact() {
         <div className="absolute right-1/4 bottom-1/4 h-[300px] w-[300px] rounded-full bg-[#a78bfa]/12 blur-[140px]" />
       </div>
 
-      <div className="relative mx-auto max-w-6xl px-6 sm:px-10">
+      <Container className="relative max-w-6xl">
         <Reveal>
           <p className="font-mono text-xs uppercase tracking-[0.25em] text-[var(--ink-3)] mb-6 text-center">— Get in touch</p>
         </Reveal>
@@ -37,18 +40,18 @@ export function Contact() {
 
         <Reveal delay={0.2}>
           <div className="mt-14 flex justify-center">
-            <Tilt3D intensity={6}>
+            <TiltCard intensity={6}>
               <a
-                href="mailto:hello@erandabuddhika.com"
+                href={socialLinks.email}
                 className="group relative inline-flex items-center gap-4 pl-7 pr-3 py-3 rounded-full glass-strong glow-ring hover:bg-white/5 transition-colors"
               >
                 <Mail className="h-5 w-5 text-[var(--accent)]" />
-                <span className="font-serif text-xl sm:text-2xl">hello@erandabuddhika.com</span>
+                <span className="font-serif text-xl sm:text-2xl">{socialLinks.email.replace('mailto:', '')}</span>
                 <span className="h-11 w-11 rounded-full bg-white text-black flex items-center justify-center transition-transform duration-500 group-hover:rotate-45">
                   <ArrowUpRight className="h-5 w-5" />
                 </span>
               </a>
-            </Tilt3D>
+            </TiltCard>
           </div>
         </Reveal>
 
@@ -57,7 +60,7 @@ export function Contact() {
             {socials.map((s) => {
               const Icon = s.icon;
               return (
-                <a key={s.label} href={s.href} target="_blank" rel="noreferrer" className="group glass p-5 flex items-center justify-between hover-lift">
+                <a key={s.label} href={s.href} target="_blank" rel="noreferrer" className="group glass p-5 flex items-center justify-between hover-lift rounded-2xl">
                   <div className="flex items-center gap-3">
                     <Icon className="h-4 w-4 text-[var(--ink-2)] group-hover:text-[var(--accent)] transition-colors" />
                     <div>
@@ -71,7 +74,7 @@ export function Contact() {
             })}
           </div>
         </Reveal>
-      </div>
+      </Container>
     </section>
   );
 }

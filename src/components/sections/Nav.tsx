@@ -1,14 +1,8 @@
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { Github, Linkedin, Mail, Menu, X } from 'lucide-react';
 import { useState } from 'react';
-
-const links = [
-  { label: 'About', href: '#about' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Projects', href: '#work' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Contact', href: '#contact' },
-];
+import { navigation, socialLinks } from '../../config/navigation';
+import { Button } from '../ui/Button';
 
 export function Nav() {
   const { scrollY } = useScroll();
@@ -34,7 +28,7 @@ export function Nav() {
           </a>
 
           <nav className="hidden md:flex items-center gap-7 text-sm text-[var(--ink-2)]">
-            {links.map((l) => (
+            {navigation.map((l) => (
               <a key={l.href} href={l.href} className="link-underline hover:text-[var(--ink-0)] transition-colors">
                 {l.label}
               </a>
@@ -42,9 +36,9 @@ export function Nav() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <a href="/resume.pdf" download className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm bg-white text-black hover:bg-[var(--accent)] transition-colors">
-              Resume
-            </a>
+            <Button asChild variant="secondary" className="hidden md:inline-flex">
+              <a href={socialLinks.resume} download>Resume</a>
+            </Button>
             <button
               onClick={() => setOpen((v) => !v)}
               aria-label="Toggle menu"
@@ -73,7 +67,7 @@ export function Nav() {
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="relative pt-28 px-8 flex flex-col gap-1"
             >
-              {links.map((l, i) => (
+              {navigation.map((l, i) => (
                 <motion.a
                   key={l.href}
                   href={l.href}
@@ -87,9 +81,9 @@ export function Nav() {
                 </motion.a>
               ))}
               <div className="flex items-center gap-4 mt-8">
-                <a href="https://github.com" className="p-3 rounded-full glass"><Github className="h-5 w-5" /></a>
-                <a href="https://linkedin.com" className="p-3 rounded-full glass"><Linkedin className="h-5 w-5" /></a>
-                <a href="#contact" onClick={() => setOpen(false)} className="ml-auto inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white text-black">
+                <a href={socialLinks.github} className="p-3 rounded-full glass"><Github className="h-5 w-5" /></a>
+                <a href={socialLinks.linkedin} className="p-3 rounded-full glass"><Linkedin className="h-5 w-5" /></a>
+                <a href={socialLinks.email} onClick={() => setOpen(false)} className="ml-auto inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white text-black">
                   <Mail className="h-4 w-4" /> Email
                 </a>
               </div>
