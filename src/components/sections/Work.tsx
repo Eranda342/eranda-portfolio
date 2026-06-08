@@ -61,19 +61,25 @@ function ProjectCard({ p }: { p: Project }) {
         <div className="relative flex items-start justify-between gap-4">
           <div>
             <p className="font-mono text-xs text-[var(--ink-3)]">{p.tag}</p>
-            <h3 className="mt-3 font-serif text-2xl sm:text-3xl text-[var(--ink-0)] leading-tight">{p.title}</h3>
+            <h3 className="mt-3 font-serif text-[var(--ink-0)] leading-tight" style={{ fontSize: 'var(--text-h3)' }}>{p.title}</h3>
           </div>
           <div className="font-mono text-xs text-[var(--ink-3)]">{p.year}</div>
         </div>
 
-        <ul className="relative mt-6 space-y-2">
-          {p.impact.map((line) => (
-            <li key={line} className="text-sm text-[var(--ink-1)] leading-relaxed flex gap-2">
-              <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-[var(--accent)]" />
-              <span>{line}</span>
-            </li>
-          ))}
-        </ul>
+        <div className="relative mt-6 space-y-4">
+          <div className="text-sm leading-relaxed">
+            <span className="font-semibold text-[var(--ink-1)]">Problem: </span>
+            <span className="text-[var(--ink-2)]">{p.problem}</span>
+          </div>
+          <div className="text-sm leading-relaxed">
+            <span className="font-semibold text-[var(--ink-1)]">Solution: </span>
+            <span className="text-[var(--ink-2)]">{p.solution}</span>
+          </div>
+          <div className="text-sm leading-relaxed">
+            <span className="font-semibold text-[var(--ink-1)]">Outcome: </span>
+            <span className="text-[var(--ink-2)]">{p.outcome}</span>
+          </div>
+        </div>
 
         <div className="relative mt-6 flex flex-wrap gap-2">
           {p.stack.map((s) => (

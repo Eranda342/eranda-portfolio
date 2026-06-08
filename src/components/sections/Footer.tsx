@@ -2,7 +2,7 @@ import { siteConfig } from '../../config/site';
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-[var(--line)] py-12">
+    <footer role="contentinfo" className="relative border-t border-[var(--line)] py-12">
       <div className="mx-auto max-w-7xl px-6 sm:px-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
         <div className="flex items-center gap-3">
           <div className="h-6 w-6 rounded-full bg-gradient-to-br from-[#5eead4] via-[#7dd3fc] to-[#a78bfa]" />

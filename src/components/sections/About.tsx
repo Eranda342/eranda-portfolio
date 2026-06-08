@@ -38,7 +38,7 @@ export function About() {
               <p className="font-mono text-xs uppercase tracking-[0.25em] text-[var(--ink-3)]">— About</p>
             </Reveal>
             <Reveal delay={0.05}>
-              <h2 className="font-serif text-4xl sm:text-5xl leading-tight text-gradient whitespace-pre-line">
+              <h2 className="font-serif leading-tight text-gradient whitespace-pre-line" style={{ fontSize: 'var(--text-h2)' }}>
                 {aboutData.heading}
               </h2>
             </Reveal>
@@ -56,7 +56,7 @@ export function About() {
           {/* ── RIGHT COLUMN: paragraphs + metric cards ── */}
           <div className="lg:col-span-5 flex flex-col gap-8">
             <Reveal delay={0.05}>
-              <p className="text-xl sm:text-2xl leading-[1.55] text-[var(--ink-1)] font-serif max-w-[600px]" dangerouslySetInnerHTML={{ __html: aboutData.bioPrimary.replace('University of Colombo', '<em className="text-[var(--accent)]">University of Colombo</em>').replace('AI/ML and Full-Stack Development', '<em className="text-[var(--accent-2)]">AI/ML and Full-Stack Development</em>') }} />
+              <p className="text-xl sm:text-2xl leading-[1.55] text-[var(--ink-1)] font-serif max-w-[600px]" dangerouslySetInnerHTML={{ __html: aboutData.bioPrimary.replace('University of Plymouth', '<em className="text-[var(--accent)]">University of Plymouth</em>').replace('Full-Stack Development and scalable web architecture', '<em className="text-[var(--accent-2)]">Full-Stack Development and scalable web architecture</em>') }} />
             </Reveal>
             <Reveal delay={0.1}>
               <p className="text-base sm:text-lg leading-[1.8] text-[var(--ink-2)] max-w-[600px]">
@@ -96,6 +96,8 @@ export function About() {
                     <ImageWithFallback
                       src={photo}
                       alt={siteConfig.name}
+                      loading="lazy"
+                      decoding="async"
                       className="absolute inset-0 h-full w-full object-cover object-top"
                       style={{
                         mixBlendMode: 'lighten',

@@ -1,0 +1,21 @@
+{
+  "name": "Eranda Buddhika | Portfolio",
+  "short_name": "Eranda",
+  "description": "Portfolio of Eranda Buddhika, Software Engineer.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050608",
+  "theme_color": "#0a0c10",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

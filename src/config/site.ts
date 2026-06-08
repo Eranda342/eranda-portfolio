@@ -1,8 +1,8 @@
 export const siteConfig = {
   name: 'Eranda Buddhika',
-  role: 'Frontend Engineer & Student',
+  role: 'Software Engineer',
   location: 'Colombo, Sri Lanka',
-  description: 'A quiet builder, focused on craft. Specializing in AI/ML and Full-Stack Development.',
-  url: 'https://eranda.dev', // Update with actual URL
+  description: 'A quiet builder, focused on craft. Specializing in Full-Stack Development and scalable systems.',
+  url: 'https://eranda.dev',
   ogImage: '/og.png',
 };

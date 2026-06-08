@@ -3,7 +3,9 @@ export type Project = {
   tag: string;
   year: string;
   stack: string[];
-  impact: string[];
+  problem: string;
+  solution: string;
+  outcome: string;
   gradient: string;
   accent: string;
   github: string;

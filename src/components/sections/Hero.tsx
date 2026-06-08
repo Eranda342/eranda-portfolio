@@ -47,7 +47,7 @@ export function Hero() {
           Available for opportunities · 2026
         </motion.div>
 
-        <h1 className="mt-8 font-serif tracking-tight leading-[0.95] text-[clamp(2.8rem,9vw,7.5rem)] max-w-4xl">
+        <h1 className="mt-8 font-serif tracking-tight leading-[0.95] max-w-4xl" style={{ fontSize: 'var(--text-h1)' }}>
           <motion.span
             initial={{ opacity: 0, y: 40, filter: 'blur(12px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -73,8 +73,8 @@ export function Hero() {
           className="mt-7 max-w-xl text-[17px] sm:text-lg leading-relaxed"
           style={{ color: '#E2E8F0' }}
         >
-          Aspiring {siteConfig.role} · Building scalable web apps. Final-year CS student
-          crafting calm, cinematic, production-grade interfaces.
+          {siteConfig.role} specializing in Full-Stack Development. Final-year CS student
+          at the University of Plymouth, crafting calm, cinematic, production-grade interfaces.
         </motion.p>
 
         <motion.div
@@ -117,6 +117,9 @@ export function Hero() {
             <ImageWithFallback
               src={photo}
               alt={`${siteConfig.name} — portrait`}
+              loading="eager"
+              fetchPriority="high"
+              decoding="sync"
               className="absolute inset-0 h-full w-full object-cover object-top"
               style={{
                 mixBlendMode: 'lighten',

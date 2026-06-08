@@ -1,4 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useDeviceTier } from '../../hooks/useDeviceTier';
+import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 type Node = { x: number; y: number; z: number; vx: number; vy: number; vz: number };
 
@@ -6,12 +8,20 @@ export function ParticleNetwork({ density = 0.00009, className = '' }: { density
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouse = useRef({ x: -9999, y: -9999, active: false });
   const running = useRef(true);
+  const inView = useRef(true);
+  const tier = useDeviceTier();
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
+    if (prefersReducedMotion) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d', { alpha: true })!;
-    let dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+    
+    // Scale pixel ratio and density by tier
+    const pixelRatioScale = tier === 'low' ? 1 : tier === 'medium' ? 1.25 : 1.75;
+    let dpr = Math.min(window.devicePixelRatio || 1, pixelRatioScale);
     let w = 0, h = 0;
     let nodes: Node[] = [];
 
@@ -21,7 +31,10 @@ export function ParticleNetwork({ density = 0.00009, className = '' }: { density
       canvas.width = Math.floor(w * dpr);
       canvas.height = Math.floor(h * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const count = Math.max(40, Math.min(140, Math.floor(w * h * density)));
+      
+      const densityMultiplier = tier === 'low' ? 0.3 : tier === 'medium' ? 0.6 : 1;
+      const count = Math.max(20, Math.min(140, Math.floor(w * h * density * densityMultiplier)));
+      
       nodes = Array.from({ length: count }, () => ({
         x: Math.random() * w,
         y: Math.random() * h,
@@ -34,6 +47,11 @@ export function ParticleNetwork({ density = 0.00009, className = '' }: { density
     resize();
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
+
+    const io = new IntersectionObserver(([entry]) => {
+      inView.current = entry.isIntersecting;
+    }, { rootMargin: '100px' });
+    io.observe(canvas);
 
     const onMove = (e: MouseEvent) => {
       const r = canvas.getBoundingClientRect();
@@ -51,7 +69,7 @@ export function ParticleNetwork({ density = 0.00009, className = '' }: { density
     let raf = 0;
     const tick = () => {
       raf = requestAnimationFrame(tick);
-      if (!running.current) return;
+      if (!running.current || !inView.current) return;
       ctx.clearRect(0, 0, w, h);
 
       const mx = mouse.current.x, my = mouse.current.y, active = mouse.current.active;
@@ -59,7 +77,6 @@ export function ParticleNetwork({ density = 0.00009, className = '' }: { density
       const mouseRadius = 180;
 
       for (const n of nodes) {
-        // mouse repulsion / depth response
         if (active) {
           const dx = n.x - mx, dy = n.y - my;
           const d2 = dx * dx + dy * dy;
@@ -85,7 +102,6 @@ export function ParticleNetwork({ density = 0.00009, className = '' }: { density
         if (n.y < -20) n.y = h + 20; else if (n.y > h + 20) n.y = -20;
       }
 
-      // links
       for (let i = 0; i < nodes.length; i++) {
         const a = nodes[i];
         for (let j = i + 1; j < nodes.length; j++) {
@@ -105,7 +121,6 @@ export function ParticleNetwork({ density = 0.00009, className = '' }: { density
         }
       }
 
-      // mouse link halo
       if (active) {
         for (const n of nodes) {
           const dx = n.x - mx, dy = n.y - my;
@@ -123,7 +138,6 @@ export function ParticleNetwork({ density = 0.00009, className = '' }: { density
         }
       }
 
-      // nodes
       for (const n of nodes) {
         const r = 1.2 + n.z * 1.4;
         const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 4);
@@ -144,11 +158,14 @@ export function ParticleNetwork({ density = 0.00009, className = '' }: { density
     return () => {
       cancelAnimationFrame(raf);
       ro.disconnect();
+      io.disconnect();
       window.removeEventListener('mousemove', onMove);
       window.removeEventListener('mouseleave', onLeave);
       document.removeEventListener('visibilitychange', visibility);
     };
-  }, [density]);
+  }, [density, tier, prefersReducedMotion]);
 
-  return <canvas ref={canvasRef} className={className} />;
+  if (prefersReducedMotion) return null;
+
+  return <canvas ref={canvasRef} className={className} aria-hidden="true" />;
 }

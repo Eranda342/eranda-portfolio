@@ -1,3 +1,5 @@
+import { socials } from '../data/socials';
+
 export const navigation = [
   { label: 'About', href: '#about' },
   { label: 'Skills', href: '#skills' },
@@ -6,9 +8,5 @@ export const navigation = [
   { label: 'Contact', href: '#contact' },
 ];
 
-export const socialLinks = {
-  github: 'https://github.com',
-  linkedin: 'https://linkedin.com',
-  resume: '/resume.pdf',
-  email: 'mailto:contact@example.com',
-};
+export const socialLinks = socials;
+

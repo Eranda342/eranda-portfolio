@@ -12,6 +12,7 @@ export function Nav() {
   return (
     <>
       <motion.header
+        role="banner"
         initial={{ y: -40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
@@ -27,7 +28,7 @@ export function Nav() {
             <span className="font-mono text-sm tracking-tight text-[var(--ink-0)]">CS_Student</span>
           </a>
 
-          <nav className="hidden md:flex items-center gap-7 text-sm text-[var(--ink-2)]">
+          <nav role="navigation" aria-label="Main navigation" className="hidden md:flex items-center gap-7 text-sm text-[var(--ink-2)]">
             {navigation.map((l) => (
               <a key={l.href} href={l.href} className="link-underline hover:text-[var(--ink-0)] transition-colors">
                 {l.label}

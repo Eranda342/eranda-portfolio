@@ -1,15 +1,26 @@
 import { useEffect, useRef } from 'react';
+import { useDeviceTier } from '../../hooks/useDeviceTier';
+import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 export function MatrixRain({ className = '' }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const inView = useRef(true);
+  const tier = useDeviceTier();
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
+    if (prefersReducedMotion) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d')!;
-    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    
+    const pixelRatioScale = tier === 'low' ? 1 : tier === 'medium' ? 1.25 : 1.5;
+    const dpr = Math.min(window.devicePixelRatio || 1, pixelRatioScale);
     let w = 0, h = 0;
-    const fontSize = 14;
+    
+    // Larger font size for lower tiers = fewer drops
+    const fontSize = tier === 'low' ? 24 : tier === 'medium' ? 18 : 14;
     let cols = 0;
     let drops: { y: number; speed: number; z: number }[] = [];
     const chars = '0123456789ABCDEF';
@@ -31,9 +42,16 @@ export function MatrixRain({ className = '' }: { className?: string }) {
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
 
+    const io = new IntersectionObserver(([entry]) => {
+      inView.current = entry.isIntersecting;
+    }, { rootMargin: '100px' });
+    io.observe(canvas);
+
     let raf = 0;
     const tick = () => {
       raf = requestAnimationFrame(tick);
+      if (!inView.current) return;
+      
       ctx.fillStyle = 'rgba(10, 12, 16, 0.18)';
       ctx.fillRect(0, 0, w, h);
       ctx.font = `${fontSize}px JetBrains Mono, monospace`;
@@ -50,8 +68,15 @@ export function MatrixRain({ className = '' }: { className?: string }) {
       }
     };
     tick();
-    return () => { cancelAnimationFrame(raf); ro.disconnect(); };
-  }, []);
+    
+    return () => { 
+      cancelAnimationFrame(raf); 
+      ro.disconnect(); 
+      io.disconnect();
+    };
+  }, [tier, prefersReducedMotion]);
 
-  return <canvas ref={canvasRef} className={className} />;
+  if (prefersReducedMotion) return null;
+
+  return <canvas ref={canvasRef} className={className} aria-hidden="true" />;
 }
