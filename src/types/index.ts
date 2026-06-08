@@ -14,7 +14,7 @@ export type Project = {
   architecture?: string;
   features?: string[];
   outcome?: string;
-  metrics?: {
+  metrics?: string[] | {
     users?: string;
     performanceGain?: string;
     duration?: string;

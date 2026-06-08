@@ -164,29 +164,39 @@ export function FeaturedProjectCard({ p }: { p: Project }) {
           {/* Metrics Row */}
           {p.metrics && (
             <div className="grid grid-cols-2 gap-3 mb-8">
-              {p.metrics.users && (
-                <div className="p-3 rounded-lg glass border border-white/5 flex flex-col gap-1">
-                  <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-[var(--ink-3)] font-mono"><Users className="h-3 w-3" /> Users</div>
-                  <div className="text-sm font-semibold text-[var(--ink-0)]">{p.metrics.users}</div>
-                </div>
-              )}
-              {p.metrics.performanceGain && (
-                <div className="p-3 rounded-lg glass border border-[var(--accent)]/10 bg-[var(--accent)]/5 flex flex-col gap-1">
-                  <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-[var(--accent)] font-mono"><Activity className="h-3 w-3" /> Performance</div>
-                  <div className="text-sm font-semibold text-[var(--ink-0)]">{p.metrics.performanceGain}</div>
-                </div>
-              )}
-              {p.metrics.duration && (
-                <div className="p-3 rounded-lg glass border border-white/5 flex flex-col gap-1">
-                  <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-[var(--ink-3)] font-mono"><Timer className="h-3 w-3" /> Duration</div>
-                  <div className="text-sm font-semibold text-[var(--ink-0)]">{p.metrics.duration}</div>
-                </div>
-              )}
-              {p.metrics.role && (
-                <div className="p-3 rounded-lg glass border border-white/5 flex flex-col gap-1">
-                  <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-[var(--ink-3)] font-mono"><Award className="h-3 w-3" /> Role</div>
-                  <div className="text-sm font-semibold text-[var(--ink-0)]">{p.metrics.role}</div>
-                </div>
+              {Array.isArray(p.metrics) ? (
+                p.metrics.map((metric, i) => (
+                  <div key={i} className="p-3 rounded-lg glass border border-[var(--accent)]/10 bg-[var(--accent)]/5 flex flex-col justify-center items-center text-center h-[72px]">
+                    <div className="text-sm font-medium text-[var(--ink-0)]">{metric}</div>
+                  </div>
+                ))
+              ) : (
+                <>
+                  {p.metrics.users && (
+                    <div className="p-3 rounded-lg glass border border-white/5 flex flex-col gap-1">
+                      <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-[var(--ink-3)] font-mono"><Users className="h-3 w-3" /> Users</div>
+                      <div className="text-sm font-semibold text-[var(--ink-0)]">{p.metrics.users}</div>
+                    </div>
+                  )}
+                  {p.metrics.performanceGain && (
+                    <div className="p-3 rounded-lg glass border border-[var(--accent)]/10 bg-[var(--accent)]/5 flex flex-col gap-1">
+                      <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-[var(--accent)] font-mono"><Activity className="h-3 w-3" /> Performance</div>
+                      <div className="text-sm font-semibold text-[var(--ink-0)]">{p.metrics.performanceGain}</div>
+                    </div>
+                  )}
+                  {p.metrics.duration && (
+                    <div className="p-3 rounded-lg glass border border-white/5 flex flex-col gap-1">
+                      <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-[var(--ink-3)] font-mono"><Timer className="h-3 w-3" /> Duration</div>
+                      <div className="text-sm font-semibold text-[var(--ink-0)]">{p.metrics.duration}</div>
+                    </div>
+                  )}
+                  {p.metrics.role && (
+                    <div className="p-3 rounded-lg glass border border-white/5 flex flex-col gap-1">
+                      <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-[var(--ink-3)] font-mono"><Award className="h-3 w-3" /> Role</div>
+                      <div className="text-sm font-semibold text-[var(--ink-0)]">{p.metrics.role}</div>
+                    </div>
+                  )}
+                </>
               )}
             </div>
           )}
@@ -205,21 +215,6 @@ export function FeaturedProjectCard({ p }: { p: Project }) {
               </div>
             )}
             
-            {/* Architecture Diagram Preview */}
-            <div className="my-6 p-5 rounded-xl bg-[#0A1029]/40 border border-white/5 relative isolate overflow-hidden">
-              <div className={`absolute inset-0 bg-gradient-to-br ${p.gradient} opacity-5 pointer-events-none`} />
-              <h4 className="text-xs font-semibold text-[var(--ink-0)] mb-4 flex items-center gap-2 font-mono uppercase tracking-wider">Architecture Flow</h4>
-              <div className="flex flex-col items-center gap-2 relative z-10">
-                <div className="px-4 py-2 rounded-lg glass text-xs text-[var(--accent)] font-mono border border-[var(--accent)]/20 shadow-[0_0_15px_rgba(0,229,255,0.05)] w-full text-center">Frontend (React / Framer)</div>
-                <div className="h-3 w-px bg-gradient-to-b from-[var(--accent)]/50 to-transparent" />
-                <div className="px-4 py-2 rounded-lg glass text-xs text-[var(--ink-1)] w-full text-center border-white/5">API Layer (WebSockets)</div>
-                <div className="h-3 w-px bg-white/10" />
-                <div className="px-4 py-2 rounded-lg glass text-xs text-[var(--ink-2)] w-full text-center border-white/5">Backend Services (Node.js)</div>
-                <div className="h-3 w-px bg-white/10" />
-                <div className="px-4 py-2 rounded-lg glass text-xs text-[var(--ink-3)] w-full text-center border-white/5">Database (PostgreSQL)</div>
-              </div>
-            </div>
-
             {p.features && p.features.length > 0 && (
               <div>
                 <h4 className="text-sm font-semibold text-[var(--ink-0)] mb-2 flex items-center gap-2">Key Features</h4>
@@ -231,12 +226,6 @@ export function FeaturedProjectCard({ p }: { p: Project }) {
                     </li>
                   ))}
                 </ul>
-              </div>
-            )}
-            {p.outcome && (
-              <div>
-                <h4 className="text-sm font-semibold text-[var(--ink-0)] mb-1 flex items-center gap-2">Outcome</h4>
-                <p className="text-sm text-[var(--ink-2)] leading-relaxed">{p.outcome}</p>
               </div>
             )}
           </div>
