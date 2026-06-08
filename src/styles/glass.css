@@ -15,10 +15,10 @@
 }
 
 .glass-nav {
-  background: rgba(10, 12, 16, 0.55);
-  border: 1px solid var(--line);
-  backdrop-filter: blur(22px) saturate(160%);
-  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  background: rgba(5, 8, 22, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
 }
 
 .glow-ring {
@@ -31,7 +31,7 @@
   inset: -1px;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(94,234,212,0.55), rgba(167,139,250,0.25) 40%, transparent 70%);
+  background: linear-gradient(135deg, rgba(56,189,248,0.30), rgba(34,211,238,0.10) 40%, transparent 70%);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
           mask-composite: exclude;

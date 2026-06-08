@@ -4,8 +4,8 @@
   "description": "Portfolio of Eranda Buddhika, Software Engineer.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#050608",
-  "theme_color": "#0a0c10",
+  "background_color": "#050816",
+  "theme_color": "#0A1029",
   "icons": [
     {
       "src": "/icon-192.png",

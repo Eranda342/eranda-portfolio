@@ -48,9 +48,9 @@ export function WaveBackground({ className = '' }: { className?: string }) {
       ctx.clearRect(0, 0, w, h);
 
       const layers = [
-        { amp: 60, freq: 0.0035, speed: 1.0, y: h * 0.55, color: 'rgba(167, 139, 250, 0.18)' },
-        { amp: 80, freq: 0.0028, speed: 0.7, y: h * 0.65, color: 'rgba(129, 140, 248, 0.14)' },
-        { amp: 110, freq: 0.0022, speed: 0.4, y: h * 0.78, color: 'rgba(196, 181, 253, 0.10)' },
+        { amp: 60, freq: 0.0035, speed: 1.0, y: h * 0.55, color: 'rgba(0, 229, 255, 0.18)' },
+        { amp: 80, freq: 0.0028, speed: 0.7, y: h * 0.65, color: 'rgba(56, 189, 248, 0.14)' },
+        { amp: 110, freq: 0.0022, speed: 0.4, y: h * 0.78, color: 'rgba(34, 211, 238, 0.10)' },
       ];
       for (const l of layers) {
         ctx.beginPath();

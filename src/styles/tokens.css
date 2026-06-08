@@ -1,23 +1,24 @@
 :root {
-  --bg-0: #050608;
-  --bg-1: #0a0c10;
-  --bg-2: #0f1218;
-  --ink-0: #f4f6fa;
-  --ink-1: #cdd3df;
-  --ink-2: #8a93a6;
+  --bg-0: #050816;
+  --bg-1: #0A1029;
+  --bg-2: #111836;
+  --ink-0: #F8FAFC;
+  --ink-1: #E2E8F0;
+  --ink-2: #94A3B8;
   --ink-3: #555c6d;
   --line: rgba(255, 255, 255, 0.08);
   --line-strong: rgba(255, 255, 255, 0.14);
 
-  --accent: #a78bfa;
-  --accent-2: #818cf8;
-  --accent-3: #c4b5fd;
-  --glow: 0 0 60px rgba(167, 139, 250, 0.45);
-  --glow-soft: 0 0 120px rgba(129, 140, 248, 0.22);
+  --accent: #22D3EE;
+  --accent-2: #38BDF8;
+  --accent-highlight: #00E5FF;
+  
+  --glow: 0 0 45px rgba(34, 211, 238, 0.25);
+  --glow-soft: 0 0 90px rgba(56, 189, 248, 0.12);
 
-  --grad-hero: radial-gradient(1200px 600px at 20% 10%, rgba(167, 139, 250, 0.16), transparent 60%),
-               radial-gradient(900px 500px at 80% 30%, rgba(129, 140, 248, 0.14), transparent 60%),
-               radial-gradient(800px 600px at 50% 100%, rgba(196, 181, 253, 0.10), transparent 60%);
+  --grad-hero: radial-gradient(1200px 600px at 20% 10%, rgba(34, 211, 238, 0.08), transparent 60%),
+               radial-gradient(900px 500px at 80% 30%, rgba(56, 189, 248, 0.06), transparent 60%),
+               radial-gradient(800px 600px at 50% 100%, rgba(34, 211, 238, 0.05), transparent 60%);
 
   --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -47,7 +48,7 @@ p, li {
 }
 
 ::selection {
-  background: rgba(167, 139, 250, 0.32);
+  background: rgba(0, 229, 255, 0.32);
   color: var(--ink-0);
 }
 

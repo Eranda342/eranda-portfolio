@@ -15,8 +15,8 @@ export function Contact() {
   return (
     <section id="contact" className="relative py-20">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-[#5eead4]/10 blur-[160px]" />
-        <div className="absolute right-1/4 bottom-1/4 h-[300px] w-[300px] rounded-full bg-[#a78bfa]/12 blur-[140px]" />
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-[#00E5FF]/10 blur-[160px]" />
+        <div className="absolute right-1/4 bottom-1/4 h-[300px] w-[300px] rounded-full bg-[#00E5FF]/12 blur-[140px]" />
       </div>
 
       <Container className="relative max-w-6xl">

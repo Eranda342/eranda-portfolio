@@ -25,7 +25,7 @@ export function Experience() {
           {/* Animated fill line driven by scroll progress */}
           <motion.div
             style={{ scaleY: lineScale, transformOrigin: 'top', position: 'absolute' }}
-            className="absolute left-[7px] sm:left-[11px] lg:left-[calc(33.333%-1px)] top-0 bottom-0 w-px bg-gradient-to-b from-[#5eead4] via-[#7dd3fc] to-transparent"
+            className="absolute left-[7px] sm:left-[11px] lg:left-[calc(33.333%-1px)] top-0 bottom-0 w-px bg-gradient-to-b from-[#00E5FF] via-[#38BDF8] to-transparent"
           />
 
           {experienceItems.map((it, i) => (
@@ -51,7 +51,7 @@ function TimelineItem({ it, index }: { it: ExperienceItem; index: number }) {
     >
       <motion.div
         initial={{ scale: 0.6, opacity: 0.5 }}
-        animate={inView ? { scale: 1.15, opacity: 1, boxShadow: '0 0 24px rgba(167,139,250,0.85)' } : {}}
+        animate={inView ? { scale: 1.15, opacity: 1, boxShadow: '0 0 24px rgba(0,229,255,0.85)' } : {}}
         transition={{ duration: 0.7, delay: index * 0.06 + 0.1, ease: [0.16, 1, 0.3, 1] }}
         className="absolute left-0 top-1.5 lg:left-[calc(33.333%-7px)] h-3.5 w-3.5 rounded-full bg-[var(--bg-0)] border-2 border-[var(--accent)]"
       />

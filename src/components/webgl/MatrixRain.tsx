@@ -59,7 +59,7 @@ export function MatrixRain({ className = '' }: { className?: string }) {
         const d = drops[i];
         const ch = chars[Math.floor(Math.random() * chars.length)];
         const x = i * fontSize + (1 - d.z) * 4;
-        ctx.fillStyle = `rgba(196, 181, 253, ${0.18 * d.z})`;
+        ctx.fillStyle = `rgba(34, 211, 238, ${0.18 * d.z})`;
         ctx.fillText(ch, x, d.y);
         ctx.fillStyle = `rgba(237, 233, 254, ${0.55 * d.z})`;
         ctx.fillText(ch, x, d.y - fontSize);

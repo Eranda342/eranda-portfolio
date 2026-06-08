@@ -110,8 +110,8 @@ export function ParticleNetwork({ density = 0.00009, className = '' }: { density
           const d2 = dx * dx + dy * dy;
           if (d2 < linkDist * linkDist) {
             const d = Math.sqrt(d2);
-            const alpha = (1 - d / linkDist) * 0.5 * Math.min(a.z, b.z);
-            ctx.strokeStyle = `rgba(167, 139, 250, ${alpha})`;
+            const alpha = (1 - d / linkDist) * 0.4 * Math.min(a.z, b.z);
+            ctx.strokeStyle = `rgba(34, 211, 238, ${alpha})`;
             ctx.lineWidth = 0.6;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
@@ -127,8 +127,8 @@ export function ParticleNetwork({ density = 0.00009, className = '' }: { density
           const d2 = dx * dx + dy * dy;
           if (d2 < mouseRadius * mouseRadius) {
             const d = Math.sqrt(d2);
-            const alpha = (1 - d / mouseRadius) * 0.55;
-            ctx.strokeStyle = `rgba(129, 140, 248, ${alpha})`;
+            const alpha = (1 - d / mouseRadius) * 0.45;
+            ctx.strokeStyle = `rgba(56, 189, 248, ${alpha})`;
             ctx.lineWidth = 0.6;
             ctx.beginPath();
             ctx.moveTo(n.x, n.y);
@@ -141,8 +141,8 @@ export function ParticleNetwork({ density = 0.00009, className = '' }: { density
       for (const n of nodes) {
         const r = 1.2 + n.z * 1.4;
         const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 4);
-        grd.addColorStop(0, `rgba(196, 181, 253, ${0.85 * n.z})`);
-        grd.addColorStop(1, 'rgba(167, 139, 250, 0)');
+        grd.addColorStop(0, `rgba(34, 211, 238, ${0.7 * n.z})`);
+        grd.addColorStop(1, 'rgba(34, 211, 238, 0)');
         ctx.fillStyle = grd;
         ctx.beginPath();
         ctx.arc(n.x, n.y, r * 4, 0, Math.PI * 2);

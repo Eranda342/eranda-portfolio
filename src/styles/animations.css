@@ -3,8 +3,8 @@
   50% { transform: translateY(-12px) rotate(1.5deg); }
 }
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 30px rgba(94, 234, 212, 0.25); }
-  50% { box-shadow: 0 0 80px rgba(94, 234, 212, 0.55); }
+  0%, 100% { box-shadow: 0 0 30px rgba(34, 211, 238, 0.15); }
+  50% { box-shadow: 0 0 80px rgba(34, 211, 238, 0.35); }
 }
 @keyframes shimmer {
   0% { background-position: -200% 0; }
@@ -24,14 +24,14 @@
 .animate-marquee { animation: marquee 40s linear infinite; }
 
 .text-gradient {
-  background: linear-gradient(135deg, #f4f6fa 0%, #cdd3df 40%, #5eead4 100%);
+  background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 40%, #00E5FF 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
 .text-gradient-accent {
-  background: linear-gradient(135deg, #5eead4 0%, #7dd3fc 50%, #a78bfa 100%);
+  background: linear-gradient(135deg, #22D3EE 0%, #38BDF8 50%, #22D3EE 100%);
   background-size: 200% 200%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -40,7 +40,7 @@
 }
 
 .shimmer-text {
-  background: linear-gradient(90deg, #555c6d 0%, #f4f6fa 50%, #555c6d 100%);
+  background: linear-gradient(90deg, #555c6d 0%, #F8FAFC 50%, #555c6d 100%);
   background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -53,7 +53,7 @@
 }
 .hover-lift:hover {
   transform: translateY(-4px);
-  box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5), 0 0 40px rgba(94, 234, 212, 0.15);
+  box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5), 0 0 40px rgba(0, 229, 255, 0.25);
 }
 
 .link-underline {

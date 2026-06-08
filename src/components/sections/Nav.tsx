@@ -21,11 +21,11 @@ export function Nav() {
         <motion.div style={{ opacity }} className="absolute inset-0 glass-nav rounded-full" />
         <div className="relative flex items-center justify-between px-5 sm:px-7 py-3 rounded-full glass-nav">
           <a href="#top" className="flex items-center gap-2 group">
-            <div className="relative h-7 w-7 rounded-full bg-gradient-to-br from-[#a78bfa] via-[#818cf8] to-[#c4b5fd] glow-accent">
-              <div className="absolute inset-[2px] rounded-full bg-[#0a0c10]" />
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#a78bfa] to-[#818cf8] opacity-60 blur-md group-hover:opacity-90 transition-opacity" />
+            <div className="relative h-7 w-7 rounded-full bg-gradient-to-br from-[#22D3EE] via-[#38BDF8] to-[#22D3EE] glow-accent">
+              <div className="absolute inset-[2px] rounded-full bg-[#0A1029]" />
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#22D3EE] to-[#38BDF8] opacity-40 blur-md group-hover:opacity-75 transition-opacity" />
             </div>
-            <span className="font-mono text-sm tracking-tight text-[var(--ink-0)]">CS_Student</span>
+            <span className="font-mono text-sm tracking-tight text-[var(--ink-0)]">EB</span>
           </a>
 
           <nav role="navigation" aria-label="Main navigation" className="hidden md:flex items-center gap-7 text-sm text-[var(--ink-2)]">
@@ -37,7 +37,7 @@ export function Nav() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <Button asChild variant="secondary" className="hidden md:inline-flex">
+            <Button asChild variant="glass" className="hidden md:inline-flex">
               <a href={socialLinks.resume} download>Resume</a>
             </Button>
             <button

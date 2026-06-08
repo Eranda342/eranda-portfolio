@@ -26,8 +26,8 @@ export function About() {
           </Suspense>
         )}
       </div>
-      <motion.div style={{ y }} className="absolute -left-32 top-1/4 h-[400px] w-[400px] rounded-full bg-[#a78bfa]/10 blur-[120px]" />
-      <motion.div style={{ y }} className="absolute -right-32 bottom-1/4 h-[400px] w-[400px] rounded-full bg-[#818cf8]/10 blur-[120px]" />
+      <motion.div style={{ y }} className="absolute -left-32 top-1/4 h-[400px] w-[400px] rounded-full bg-[#00E5FF]/10 blur-[120px]" />
+      <motion.div style={{ y }} className="absolute -right-32 bottom-1/4 h-[400px] w-[400px] rounded-full bg-[#38BDF8]/10 blur-[120px]" />
 
       <Container className="relative">
         <div className="grid lg:grid-cols-12 gap-x-12 gap-y-16 items-start">

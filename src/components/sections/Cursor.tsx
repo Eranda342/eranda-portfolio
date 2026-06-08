@@ -35,7 +35,7 @@ export function Cursor() {
         animate={{ scale: hover ? 2.2 : 1, opacity: hover ? 0.4 : 0.8 }}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         className="-translate-x-1/2 -translate-y-1/2 h-3 w-3 rounded-full bg-[var(--accent)] mix-blend-difference"
-        style={{ boxShadow: '0 0 24px rgba(94, 234, 212, 0.7)' }}
+        style={{ boxShadow: '0 0 24px rgba(0, 229, 255, 0.7)' }}
       />
     </motion.div>
   );

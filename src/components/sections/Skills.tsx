@@ -82,7 +82,7 @@ export function Skills() {
                     <div className="absolute -top-16 -right-16 h-44 w-44 rounded-full blur-3xl opacity-30 transition-opacity duration-700 group-hover:opacity-70 pointer-events-none" style={{ background: g.color }} />
                     <div className="relative flex items-start justify-between gap-3 mb-5">
                       <div className="flex items-center gap-3">
-                        <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-[#a78bfa]/25 to-[#818cf8]/15 flex items-center justify-center border border-[var(--line)] group-hover:border-[var(--accent)]/50 transition-colors">
+                        <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-[#00E5FF]/25 to-[#38BDF8]/15 flex items-center justify-center border border-[var(--line)] group-hover:border-[var(--accent)]/50 transition-colors">
                           <Icon className="h-4 w-4 text-[var(--accent)]" />
                         </div>
                         <h3 className="font-serif text-xl text-[var(--ink-0)]">{g.title}</h3>

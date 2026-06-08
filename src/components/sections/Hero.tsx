@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'motion/react';
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'motion/react';
 import React, { useRef, lazy, Suspense } from 'react';
 import { ArrowDownRight, Sparkles } from 'lucide-react';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
@@ -18,20 +18,43 @@ export function Hero() {
 
   const [firstName, lastName] = siteConfig.name.split(' ');
 
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const smoothMx = useSpring(mx, { stiffness: 40, damping: 25, mass: 0.5 });
+  const smoothMy = useSpring(my, { stiffness: 40, damping: 25, mass: 0.5 });
+
+  const photoX = useTransform(smoothMx, [-1, 1], [3, -3]);
+  const photoY = useTransform(smoothMy, [-1, 1], [3, -3]);
+  const particlesX = useTransform(smoothMx, [-1, 1], [8, -8]);
+  const particlesY = useTransform(smoothMy, [-1, 1], [8, -8]);
+  const glowX = useTransform(smoothMx, [-1, 1], [15, -15]);
+  const glowY = useTransform(smoothMy, [-1, 1], [15, -15]);
+
+  React.useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      mx.set((e.clientX / window.innerWidth - 0.5) * 2);
+      my.set((e.clientY / window.innerHeight - 0.5) * 2);
+    };
+    window.addEventListener('mousemove', onMove);
+    return () => window.removeEventListener('mousemove', onMove);
+  }, [mx, my]);
+
   return (
-    <section ref={ref} id="top" style={{ position: 'relative' }} className="relative min-h-[100svh] w-full overflow-hidden">
+    <section ref={ref} id="top" style={{ position: 'relative' }} className="relative min-h-[90svh] w-full overflow-hidden">
       <div className="absolute inset-0" style={{ background: 'var(--grad-hero)' }} />
       <div className="absolute inset-0 grid-bg opacity-60" />
       <div className="noise" />
 
       {/* Particle network (Lazy Loaded) */}
-      <Suspense fallback={null}>
-        <ParticleNetwork className="absolute inset-0 h-full w-full" />
-      </Suspense>
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute right-[5%] top-[20%] h-[40vh] w-[40vh] rounded-full bg-[#a78bfa]/10 blur-[140px]" />
-        <div className="absolute left-[-5%] bottom-[10%] h-[35vh] w-[35vh] rounded-full bg-[#818cf8]/10 blur-[140px]" />
-      </div>
+      <motion.div style={{ x: particlesX, y: particlesY }} className="absolute inset-0 pointer-events-none z-0">
+        <Suspense fallback={null}>
+          <ParticleNetwork className="h-full w-full" />
+        </Suspense>
+      </motion.div>
+      <motion.div style={{ x: glowX, y: glowY }} className="absolute inset-0 pointer-events-none">
+        <div className="absolute right-[5%] top-[20%] h-[40vh] w-[40vh] rounded-full bg-[#00E5FF]/10 blur-[140px]" />
+        <div className="absolute left-[-5%] bottom-[10%] h-[35vh] w-[35vh] rounded-full bg-[#38BDF8]/10 blur-[140px]" />
+      </motion.div>
 
       <motion.div style={{ y, opacity, scale }} className="relative z-10 mx-auto max-w-7xl px-6 sm:px-10 pt-40 sm:pt-48 pb-24 flex flex-col items-start">
         <motion.div
@@ -40,9 +63,9 @@ export function Hero() {
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
           className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-[var(--ink-2)]"
         >
-          <span className="relative flex h-1.5 w-1.5">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--accent)] opacity-75" />
-            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[var(--accent)]" />
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
           </span>
           Available for opportunities · 2026
         </motion.div>
@@ -62,7 +85,7 @@ export function Hero() {
             transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1], delay: 0.55 }}
             className="block italic text-gradient-accent"
           >
-            {lastName}.
+            {lastName}
           </motion.span>
         </h1>
 
@@ -73,8 +96,8 @@ export function Hero() {
           className="mt-7 max-w-xl text-[17px] sm:text-lg leading-relaxed"
           style={{ color: '#E2E8F0' }}
         >
-          {siteConfig.role} specializing in Full-Stack Development. Final-year CS student
-          at the University of Plymouth, crafting calm, cinematic, production-grade interfaces.
+          {siteConfig.role}. Building scalable web applications, AI-powered systems,
+          and modern digital experiences. Final-year CS student at the University of Plymouth.
         </motion.p>
 
         <motion.div
@@ -87,7 +110,7 @@ export function Hero() {
             <a href="#work">
               <span className="relative z-10">View My Work</span>
               <ArrowDownRight className="relative z-10 ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
-              <span className="absolute inset-0 bg-gradient-to-r from-[#a78bfa] via-[#818cf8] to-[#c4b5fd] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <span className="absolute inset-0 bg-gradient-to-r from-[#00E5FF] via-[#38BDF8] to-[#22D3EE] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </a>
           </Button>
           <Button asChild variant="glass" className="h-12 px-5">
@@ -110,10 +133,11 @@ export function Hero() {
           transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1], delay: 0.6 }}
           className="hidden md:block absolute right-10 top-1/2 -translate-y-1/2 lg:right-16"
         >
-          <div
-            className="relative h-[504px] w-[392px] lg:h-[616px] lg:w-[476px]"
-            style={{ background: 'transparent' }}
+          <motion.div
+            style={{ x: photoX, y: photoY }}
+            className="relative h-[580px] w-[450px] lg:h-[710px] lg:w-[550px]"
           >
+            <div style={{ background: 'transparent' }} className="absolute inset-0">
             <ImageWithFallback
               src={photo}
               alt={`${siteConfig.name} — portrait`}
@@ -132,13 +156,14 @@ export function Hero() {
             <div
               className="absolute inset-0 pointer-events-none"
               style={{
-                background: 'linear-gradient(170deg, rgba(99,102,241,0.12) 0%, rgba(168,85,247,0.10) 60%, rgba(99,102,241,0.07) 100%)',
+                background: 'radial-gradient(ellipse at 50% 40%, rgba(34, 211, 238, 0.18) 0%, rgba(56, 189, 248, 0.08) 45%, transparent 75%)',
                 mixBlendMode: 'color',
                 maskImage: 'linear-gradient(to bottom, black 0%, black 35%, transparent 100%)',
                 WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 35%, transparent 100%)',
               }}
             />
-          </div>
+            </div>
+          </motion.div>
         </motion.div>
 
         <motion.div
