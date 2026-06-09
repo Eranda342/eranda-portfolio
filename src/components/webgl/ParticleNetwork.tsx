@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDeviceTier } from '../../hooks/useDeviceTier';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 

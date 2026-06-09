@@ -237,12 +237,16 @@ export function FeaturedProjectCard({ p }: { p: Project }) {
               ))}
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-3 pt-6 border-t border-white/5">
-              <a href={p.githubUrl} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 px-6 py-3 rounded-full glass text-sm font-medium text-[var(--ink-1)] hover:bg-white/10 hover:text-white transition-colors w-full sm:w-auto">
-                <Github className="h-4 w-4" /> View Source
-              </a>
-              <a href={p.liveUrl} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[var(--accent)] text-[#050816] text-sm font-medium hover:bg-[var(--accent-highlight)] transition-colors shadow-[0_0_20px_rgba(0,229,255,0.3)] w-full sm:w-auto">
-                <ExternalLink className="h-4 w-4" /> Live Demo
-              </a>
+              {p.githubUrl && p.githubUrl !== '#' && (
+                <a href={p.githubUrl} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 px-6 py-3 rounded-full glass text-sm font-medium text-[var(--ink-1)] hover:bg-white/10 hover:text-white transition-colors w-full sm:w-auto">
+                  <Github className="h-4 w-4" /> View Source
+                </a>
+              )}
+              {p.liveUrl && p.liveUrl !== '#' && (
+                <a href={p.liveUrl} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[var(--accent)] text-[#050816] text-sm font-medium hover:bg-[var(--accent-highlight)] transition-colors shadow-[0_0_20px_rgba(0,229,255,0.3)] w-full sm:w-auto">
+                  <ExternalLink className="h-4 w-4" /> Live Demo
+                </a>
+              )}
             </div>
           </div>
         </div>
@@ -283,12 +287,16 @@ export function ProjectCard({ p }: { p: Project }) {
           <div className="flex items-start justify-between gap-4 mb-4">
             <h3 className="font-serif text-2xl text-[var(--ink-0)] leading-tight">{p.title}</h3>
             <div className="flex items-center gap-2">
-              <a href={p.githubUrl} target="_blank" rel="noreferrer" aria-label="GitHub" className="h-8 w-8 rounded-full glass flex items-center justify-center hover:bg-white/10 text-[var(--ink-2)] hover:text-white transition-colors">
-                <Github className="h-4 w-4" />
-              </a>
-              <a href={p.liveUrl} target="_blank" rel="noreferrer" aria-label="Live demo" className="h-8 w-8 rounded-full glass flex items-center justify-center hover:bg-white/10 text-[var(--ink-2)] hover:text-white transition-colors">
-                <ExternalLink className="h-4 w-4" />
-              </a>
+              {p.githubUrl && p.githubUrl !== '#' && (
+                <a href={p.githubUrl} target="_blank" rel="noreferrer" aria-label="GitHub" className="h-8 w-8 rounded-full glass flex items-center justify-center hover:bg-white/10 text-[var(--ink-2)] hover:text-white transition-colors">
+                  <Github className="h-4 w-4" />
+                </a>
+              )}
+              {p.liveUrl && p.liveUrl !== '#' && (
+                <a href={p.liveUrl} target="_blank" rel="noreferrer" aria-label="Live demo" className="h-8 w-8 rounded-full glass flex items-center justify-center hover:bg-white/10 text-[var(--ink-2)] hover:text-white transition-colors">
+                  <ExternalLink className="h-4 w-4" />
+                </a>
+              )}
             </div>
           </div>
 

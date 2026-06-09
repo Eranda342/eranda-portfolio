@@ -1,4 +1,4 @@
-import React, { useRef, lazy, Suspense } from 'react';
+import { useRef, lazy, Suspense } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { Reveal } from '../ui/Reveal';
 import { TiltCard } from '../ui/TiltCard';

@@ -2,7 +2,7 @@ import { HTMLAttributes } from 'react';
 import { Reveal } from './Reveal';
 import { cn } from '../../utils/cn';
 
-interface SectionHeadingProps extends HTMLAttributes<HTMLDivElement> {
+interface SectionHeadingProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   label: string;
   title: React.ReactNode;
 }

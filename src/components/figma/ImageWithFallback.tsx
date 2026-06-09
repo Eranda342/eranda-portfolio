@@ -22,6 +22,6 @@ export function ImageWithFallback(props: React.ImgHTMLAttributes<HTMLImageElemen
       </div>
     </div>
   ) : (
-    <img src={src} alt={alt} className={className} style={style} fetchpriority={fetchPriority} {...rest} onError={handleError} />
+    <img src={src} alt={alt} className={className} style={style} fetchPriority={fetchPriority} {...rest} onError={handleError} />
   )
 }
