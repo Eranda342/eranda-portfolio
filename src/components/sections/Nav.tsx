@@ -1,13 +1,16 @@
-import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'motion/react';
 import { Github, Linkedin, Mail, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { navigation, socialLinks } from '../../config/navigation';
-import { Button } from '../ui/Button';
 
 export function Nav() {
   const { scrollY } = useScroll();
-  const opacity = useTransform(scrollY, [0, 80], [0, 1]);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setIsScrolled(latest > 50);
+  });
 
   return (
     <>
@@ -18,32 +21,34 @@ export function Nav() {
         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
         className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-5xl"
       >
-        <motion.div style={{ opacity }} className="absolute inset-0 glass-nav rounded-full" />
-        <div className="relative flex items-center justify-between px-5 sm:px-7 py-3 rounded-full glass-nav">
-          <a href="#top" className="flex items-center gap-2 group">
-            <div className="relative h-7 w-7 rounded-full bg-gradient-to-br from-[#22D3EE] via-[#38BDF8] to-[#22D3EE] glow-accent">
-              <div className="absolute inset-[2px] rounded-full bg-[#0A1029]" />
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#22D3EE] to-[#38BDF8] opacity-40 blur-md group-hover:opacity-75 transition-opacity" />
+        <div className={`relative flex items-center justify-between px-5 sm:px-7 py-3 rounded-full glass-nav ${isScrolled ? 'scrolled' : ''}`}>
+          <a href="#top" className="flex items-center gap-3 group">
+            <div className="relative flex items-center justify-center h-8 w-8 rounded-full border-2 border-[#22d3ee]/80 shadow-[0_0_10px_rgba(34,211,238,0.2)] group-hover:shadow-[0_0_15px_rgba(34,211,238,0.4)] transition-shadow bg-[#060c18]">
+              <span className="font-mono text-xs font-bold tracking-tight text-[#22d3ee]">EB</span>
             </div>
-            <span className="font-mono text-sm tracking-tight text-[var(--ink-0)]">EB</span>
           </a>
 
-          <nav role="navigation" aria-label="Main navigation" className="hidden md:flex items-center gap-7 text-sm text-[var(--ink-2)]">
+          <nav role="navigation" aria-label="Main navigation" className="hidden md:flex items-center gap-7 text-sm font-medium">
             {navigation.map((l) => (
-              <a key={l.href} href={l.href} className="link-underline hover:text-[var(--ink-0)] transition-colors">
+              <a key={l.href} href={l.href} className="relative group text-white/75 hover:text-[#22d3ee] transition-colors py-1">
                 {l.label}
+                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-[#22d3ee] transition-all duration-300 group-hover:w-full opacity-50 group-hover:opacity-100" />
               </a>
             ))}
           </nav>
 
-          <div className="flex items-center gap-2">
-            <Button asChild variant="glass" className="hidden md:inline-flex">
-              <a href={socialLinks.resume} download>Resume</a>
-            </Button>
+          <div className="flex items-center gap-3">
+            <a 
+              href={socialLinks.resume} 
+              download 
+              className="hidden md:inline-flex items-center justify-center px-6 py-2 text-sm font-medium text-white/90 bg-white/5 border border-white/10 rounded-full backdrop-blur-[20px] transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_4px_20px_rgba(34,211,238,0.15)] hover:border-white/20 hover:text-white"
+            >
+              Resume
+            </a>
             <button
               onClick={() => setOpen((v) => !v)}
               aria-label="Toggle menu"
-              className="md:hidden p-2 rounded-full hover:bg-white/5 transition-colors"
+              className="md:hidden p-2 rounded-full hover:bg-white/5 transition-colors text-white/75 hover:text-white"
             >
               {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>

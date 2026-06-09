@@ -3,6 +3,6 @@ export const siteConfig = {
   role: 'Software Engineer',
   location: 'Colombo, Sri Lanka',
   description: 'A quiet builder, focused on craft. Specializing in Full-Stack Development and scalable systems.',
-  url: 'https://eranda.dev',
+  url: 'https://eranda.tech',
   ogImage: '/og.png',
 };
