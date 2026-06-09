@@ -88,7 +88,7 @@ export function Contact() {
             </a>
 
             <a
-              href="/resume.pdf"
+              href="/files/Eranda_Buddhika_Resume.pdf"
               download
               className="group relative inline-flex items-center gap-4 px-8 py-4 rounded-full bg-white/5 border border-white/10 hover:border-[#00E5FF]/50 hover:bg-[#00E5FF]/10 shadow-[0_0_20px_rgba(0,0,0,0.5)] transition-all duration-300 w-full sm:w-1/2 justify-center"
             >
