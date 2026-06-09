@@ -96,8 +96,8 @@ export function Hero() {
           className="mt-7 max-w-xl text-[17px] sm:text-lg leading-relaxed"
           style={{ color: '#E2E8F0' }}
         >
-          {siteConfig.role}. Building scalable web applications, AI-powered systems,
-          and modern digital experiences. Final-year CS student at the University of Plymouth.
+          Final-Year Computer Science Student. Building scalable web applications, AI-powered systems, 
+          and modern digital experiences. Passionate about full-stack engineering and modern software architecture.
         </motion.p>
 
         <motion.div
