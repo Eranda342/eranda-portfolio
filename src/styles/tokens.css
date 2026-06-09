@@ -35,7 +35,6 @@ html {
 }
 
 html, body {
-  overflow-x: hidden;
   background: var(--bg-0);
   color: var(--ink-0);
   font-family: 'Inter', system-ui, sans-serif;

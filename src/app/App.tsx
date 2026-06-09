@@ -7,6 +7,7 @@ import { About } from '../components/sections/About';
 import { Skills } from '../components/sections/Skills';
 import { Work } from '../components/sections/Work';
 import { EngineeringHighlights } from '../components/sections/EngineeringHighlights';
+import { EngineeringProcess } from '../components/sections/EngineeringProcess';
 import { Experience } from '../components/sections/Experience';
 import { Contact } from '../components/sections/Contact';
 import { Footer } from '../components/sections/Footer';
@@ -16,7 +17,6 @@ export default function App() {
     <MotionConfig reducedMotion="user">
       <div
         className="relative w-full bg-[var(--bg-0)] text-[var(--ink-0)]"
-        style={{ overflowX: 'clip' }}
       >
         <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:p-4 focus:bg-[var(--bg-0)] focus:text-[var(--accent)] glass-strong">
           Skip to main content
@@ -45,8 +45,12 @@ export default function App() {
             <Work />
           </div>
 
-          <div className="relative" style={{ zIndex: 1, marginTop: '140px' }}>
+          <div className="relative" style={{ zIndex: 1 }}>
             <EngineeringHighlights />
+          </div>
+
+          <div className="relative" style={{ zIndex: 1, marginTop: '140px' }}>
+            <EngineeringProcess />
           </div>
 
           <div className="relative" style={{ zIndex: 1, marginTop: '140px' }}>

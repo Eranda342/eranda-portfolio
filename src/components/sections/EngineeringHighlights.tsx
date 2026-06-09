@@ -3,42 +3,42 @@ import { SectionHeading } from '../ui/SectionHeading';
 import { GlassCard } from '../ui/GlassCard';
 import { Reveal } from '../ui/Reveal';
 import { TiltCard } from '../ui/TiltCard';
-import { Server, Cpu, Zap, Network } from 'lucide-react';
+import { Server, Zap, Database, Layout } from 'lucide-react';
 
 const highlights = [
   {
-    title: 'Full-Stack Development',
-    description: 'Architecting scalable applications from highly interactive React frontends down to robust Node.js and PostgreSQL backends. Focus on type safety and maintainable code.',
-    tech: ['React', 'TypeScript', 'Node.js', 'PostgreSQL'],
+    title: 'Full-Stack Web Development',
+    description: 'Building complete web applications using modern frontend and backend technologies.',
+    tech: ['React', 'Node.js', 'Express.js', 'MongoDB'],
     icon: Server,
     accent: '#00E5FF'
   },
   {
-    title: 'System Architecture',
-    description: 'Designing distributed systems, microservices, and event-driven architectures. Experienced in building streaming data pipelines and real-time WebSocket layers.',
-    tech: ['WebSockets', 'Docker', 'Redis', 'Microservices'],
-    icon: Network,
+    title: 'Real-Time Applications',
+    description: 'Developing interactive systems with live updates, realtime communication, and collaborative features.',
+    tech: ['Socket.IO', 'WebSockets', 'JWT', 'REST APIs'],
+    icon: Zap,
     accent: '#38BDF8'
   },
   {
-    title: 'Performance Optimization',
-    description: 'Deep diving into render cycles, query plans, and bundle sizes. Proven ability to reduce p95 latencies and achieve consistent 60fps on complex WebGL interfaces.',
-    tech: ['WebGL', 'Profiling', 'Caching', 'Edge Compute'],
-    icon: Zap,
+    title: 'Database & Cloud',
+    description: 'Designing secure databases and deploying scalable applications with cloud services.',
+    tech: ['MongoDB', 'MySQL', 'Microsoft Azure', 'Cloudinary'],
+    icon: Database,
     accent: '#22D3EE'
   },
   {
-    title: 'AI / ML Integration',
-    description: 'Integrating machine learning models into production environments. Building multimodal embedding search pipelines and LLM-powered application features.',
-    tech: ['PyTorch', 'Python', 'Vector DBs', 'FastAPI'],
-    icon: Cpu,
+    title: 'UI / UX Development',
+    description: 'Creating responsive and engaging user experiences with modern frontend technologies and motion design.',
+    tech: ['Tailwind CSS', 'TypeScript', 'Framer Motion', 'Figma'],
+    icon: Layout,
     accent: '#00E5FF'
   }
 ];
 
 export function EngineeringHighlights() {
   return (
-    <section className="relative py-20 bg-[#02040a]">
+    <section className="relative py-20">
       <Container>
         <SectionHeading 
           label="Capabilities" 
