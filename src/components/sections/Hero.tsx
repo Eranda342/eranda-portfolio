@@ -131,11 +131,11 @@ export function Hero() {
           initial={{ opacity: 0, scale: 0.9, y: 30 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1], delay: 0.6 }}
-          className="hidden md:block absolute right-10 top-1/2 -translate-y-1/2 lg:right-16"
+          className="relative mt-16 self-center md:absolute md:mt-0 md:self-auto md:right-10 md:top-1/2 md:-translate-y-1/2 lg:right-16"
         >
           <motion.div
             style={{ x: photoX, y: photoY }}
-            className="relative h-[580px] w-[450px] lg:h-[710px] lg:w-[550px]"
+            className="relative h-[400px] w-[300px] sm:h-[480px] sm:w-[360px] md:h-[580px] md:w-[450px] lg:h-[710px] lg:w-[550px]"
           >
             <div style={{ background: 'transparent' }} className="absolute inset-0">
             <ImageWithFallback

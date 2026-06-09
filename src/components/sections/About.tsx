@@ -18,7 +18,7 @@ export function About() {
   const { ref: waveRef, active: waveActive } = useInViewMount<HTMLDivElement>();
 
   return (
-    <section id="about" ref={ref} style={{ position: 'relative' }} className="relative py-20">
+    <section id="about" ref={ref} style={{ position: 'relative' }} className="relative py-20 overflow-hidden">
       <div ref={waveRef} className="absolute inset-0 pointer-events-none">
         {waveActive && (
           <Suspense fallback={null}>
@@ -85,7 +85,7 @@ export function About() {
           </div>
 
           {/* ── PHOTO COLUMN: floats right, no text collision ── */}
-          <div className="hidden lg:flex lg:col-span-3 justify-center items-start">
+          <div className="flex lg:col-span-3 justify-center items-start w-full mt-4 lg:mt-0">
             <Reveal delay={0.1}>
               <TiltCard intensity={6}>
                 <div
