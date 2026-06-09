@@ -27,7 +27,7 @@ export const projects: Project[] = [
     title: 'Eranda Portfolio',
     category: 'frontend',
     description: 'Production-grade developer portfolio featuring cinematic glassmorphism UI, responsive layouts, smooth scrolling, interactive animations, and modern frontend architecture built for performance and accessibility.',
-    screenshot: '/projects/halcyon.svg',
+    screenshot: '/projects/Eranda_portfolio.jpeg',
     githubUrl: 'https://github.com/Eranda342/eranda-portfolio.git',
     liveUrl: 'https://eranda.tech',
     techStack: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Vite'],
